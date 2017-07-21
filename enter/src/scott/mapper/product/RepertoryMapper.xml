@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scott.dao.product.RepertoryDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="scott.entity.product.Repertory" >
+	<result column="id" property="id"/>
+	<result column="productid" property="productid"/>
+	<result column="productcount" property="productcount"/>
+	<result column="workoffcount" property="workoffcount"/>
+	<result column="surpluscount" property="surpluscount"/>
+	<result column="adduser" property="adduser"/>
+	<result column="addtime" property="addtime"/>
+	<result column="lastupdateuser" property="lastupdateuser"/>
+	<result column="lastupdatetime" property="lastupdatetime"/>
+	<result column="deletesign" property="deletesign"/>
+</resultMap>
+       
+<!-- repertory table all fields -->
+<sql id="Base_Column_List" >
+	 id,productid,productcount,workoffcount,surpluscount,adduser,addtime,lastupdateuser,lastupdatetime,deletesign
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	<if test="productid != null and productid != ''" >
+	    and productid =  #{productid}
+	</if>
+	<if test="productcount != null and productcount != ''" >
+	    and productcount =  #{productcount}
+	</if>
+	<if test="workoffcount != null and workoffcount != ''" >
+	    and workoffcount =  #{workoffcount}
+	</if>
+	<if test="surpluscount != null and surpluscount != ''" >
+	    and surpluscount =  #{surpluscount}
+	</if>
+	<if test="adduser != null and adduser != ''" >
+	    and adduser =  #{adduser}
+	</if>
+	<if test="addtime != null and addtime != ''" >
+	    and addtime =  #{addtime}
+	</if>
+	<if test="lastupdateuser != null and lastupdateuser != ''" >
+	    and lastupdateuser =  #{lastupdateuser}
+	</if>
+	<if test="lastupdatetime != null and lastupdatetime != ''" >
+	    and lastupdatetime =  #{lastupdatetime}
+	</if>
+	<if test="deletesign != null and deletesign != ''" >
+	    and deletesign =  #{deletesign}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into repertory(id,productid,productcount,workoffcount,surpluscount,adduser,addtime,lastupdateuser,lastupdatetime,deletesign)
+ values(#{id},#{productid},#{productcount},#{workoffcount},#{surpluscount},#{adduser},#{addtime},#{lastupdateuser},#{lastupdatetime},#{deletesign})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update repertory set productid=#{productid},productcount=#{productcount},workoffcount=#{workoffcount},surpluscount=#{surpluscount},adduser=#{adduser},addtime=#{addtime},lastupdateuser=#{lastupdateuser},lastupdatetime=#{lastupdatetime},deletesign=#{deletesign} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update repertory set 
+	<trim  suffixOverrides="," >
+	<if test="productid != null  ">
+		productid=#{productid},
+	</if>
+	<if test="productcount != null  ">
+		productcount=#{productcount},
+	</if>
+	<if test="workoffcount != null  ">
+		workoffcount=#{workoffcount},
+	</if>
+	<if test="surpluscount != null  ">
+		surpluscount=#{surpluscount},
+	</if>
+	<if test="adduser != null  ">
+		adduser=#{adduser},
+	</if>
+	<if test="addtime != null  ">
+		addtime=#{addtime},
+	</if>
+	<if test="lastupdateuser != null  ">
+		lastupdateuser=#{lastupdateuser},
+	</if>
+	<if test="lastupdatetime != null  ">
+		lastupdatetime=#{lastupdatetime},
+	</if>
+	<if test="deletesign != null  ">
+		deletesign=#{deletesign},
+	</if>
+	</trim> where id=#{id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from repertory where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 产品库存 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from repertory where id = #{id}
+</select>
+
+<!-- 根据产品编号查询  -->
+<select id="getProductId" resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> from repertory where productId = #{productId}
+</select>
+
+<!-- 产品库存 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from repertory 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询产品库存列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from repertory 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

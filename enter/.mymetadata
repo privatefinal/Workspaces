@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="enter"
+  id="myeclipse.1476258950833"
+  context-root="/enter"
+  j2ee-spec="5.0"
+  archive="enter.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebApp" />
+  </attributes>
+</project-module>
+

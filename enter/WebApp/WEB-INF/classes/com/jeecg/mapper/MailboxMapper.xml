@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeecg.dao.MailboxDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.jeecg.entity.Mailbox" >
+	<result column="id" property="id"/>
+	<result column="mailaccount" property="mailaccount"/>
+	<result column="mailpassword" property="mailpassword"/>
+	<result column="maillicense" property="maillicense"/>
+	<result column="adduser" property="adduser"/>
+	<result column="adddate" property="adddate"/>
+	<result column="updatetime" property="updatetime"/>
+	<result column="updateuser" property="updateuser"/>
+	<result column="deletesign" property="deletesign"/>
+	<result column="statesign" property="statesign"/>
+	<result column="host" property="host"/>
+</resultMap>
+       
+<!-- mailbox table all fields -->
+<sql id="Base_Column_List" >
+	 id,mailaccount,mailpassword,maillicense,adduser,adddate,updatetime,updateuser,deletesign,statesign,host
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	<if test="mailaccount != null and mailaccount != ''" >
+	    and mailaccount =  #{mailaccount}
+	</if>
+	<if test="mailpassword != null and mailpassword != ''" >
+	    and mailpassword =  #{mailpassword}
+	</if>
+	<if test="maillicense != null and maillicense != ''" >
+	    and maillicense =  #{maillicense}
+	</if>
+	<if test="adduser != null and adduser != ''" >
+	    and adduser =  #{adduser}
+	</if>
+	<if test="adddate != null and adddate != ''" >
+	    and adddate =  #{adddate}
+	</if>
+	<if test="updatetime != null and updatetime != ''" >
+	    and updatetime =  #{updatetime}
+	</if>
+	<if test="updateuser != null and updateuser != ''" >
+	    and updateuser =  #{updateuser}
+	</if>
+	<if test="deletesign != null and deletesign != ''" >
+	    and deletesign =  #{deletesign}
+	</if>
+	<if test="statesign != null and statesign != ''" >
+	    and statesign =  #{statesign}
+	</if>
+	<if test="host != null and host != ''">
+		and host = #{host}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into mailbox(id,mailaccount,mailpassword,maillicense,adduser,adddate,updatetime,updateuser,deletesign,statesign,host)
+ values(#{id},#{mailaccount},#{mailpassword},#{maillicense},#{adduser},#{adddate},#{updatetime},#{updateuser},#{deletesign},#{statesign},#{host})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update mailbox set mailaccount=#{mailaccount},mailpassword=#{mailpassword},maillicense=#{maillicense},adduser=#{adduser},adddate=#{adddate},updatetime=now(),updateuser=#{updateuser},deletesign=#{deletesign},statesign=#{statesign},host=#{host} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update mailbox set 
+	<trim  suffixOverrides="," >
+	<if test="mailaccount != null  ">
+		mailaccount=#{mailaccount},
+	</if>
+	<if test="mailpassword != null  ">
+		mailpassword=#{mailpassword},
+	</if>
+	<if test="maillicense != null  ">
+		maillicense=#{maillicense},
+	</if>
+	<if test="adduser != null  ">
+		adduser=#{adduser},
+	</if>
+	<if test="adddate != null  ">
+		adddate=#{adddate},
+	</if>
+	<if test="updatetime != null  ">
+		updatetime=#{updatetime},
+	</if>
+	<if test="updateuser != null  ">
+		updateuser=#{updateuser},
+	</if>
+	<if test="deletesign != null  ">
+		deletesign=#{deletesign},
+	</if>
+	<if test="statesign != null  ">
+		statesign=#{statesign},
+	</if>
+	<if test="host != null">
+		host = #{host},
+	</if>
+	</trim> where id=#{id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete  from mailbox where id = #{id}
+</delete>
+
+<!--逻辑删除，恢复-->
+<update id="deleteUndo" parameterType="Object">
+	update mailbox set 
+	<trim  suffixOverrides="," >
+	<if test="deletesign != null ">
+		deleteSign=#{deletesign},
+	</if>
+	<if test="statesign != null  ">
+		stateSign=#{statesign},
+	</if>
+	</trim> where id=#{id}
+</update>
+ 
+<!-- 根据id查询 邮箱管理 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from mailbox where id = #{id}
+</select>
+
+<!-- 邮箱管理 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from mailbox 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询邮箱管理列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from mailbox 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

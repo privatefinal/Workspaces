@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scott.dao.product.ProductDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="scott.entity.product.Product" >
+	<result column="id" property="id"/>
+	<result column="productname" property="productname"/>
+	<result column="productnumber" property="productnumber"/>
+	<result column="buyingprice" property="buyingprice"/>
+	<result column="riseprice" property="riseprice"/>
+	<result column="sellprice" property="sellprice"/>
+	<result column="saleendtime" property="saleendtime"/>
+	<result column="publishprice" property="publishprice"/>
+	<result column="releaseuser" property="releaseuser"/>
+	<result column="releasetime" property="releasetime"/>
+	<result column="updateuser" property="updateuser"/>
+	<result column="updatetime" property="updatetime"/>
+	<result column="deletemark" property="deletemark"/>
+	<result column="imagtype" property="imagtype"/>
+	<result column="images" property="images"/>
+	<result column="imagespath" property="imagespath"/>
+	<result column="supplierid" property="supplierid"/>
+	<result column="offsign" property="offsign"/>
+	<result column="p_describe" property="p_describe"/>
+	<result column="sourcesign" property="sourcesign"/>
+	<result column="brand" property="brand"/>
+	<result column="features" property="features"/>
+	<result column="p_color" property="p_color"/>
+	<result column="p_weight" property="p_weight"/>
+	<result column="p_width" property="p_width"/>
+	<result column="p_height" property="p_height"/>
+	<result column="p_length" property="p_length"/>
+	<result column="country" property="country"/>
+	<result column="mailId" property="mailId"/>
+	<result column="url" property="url"/>
+	<result column="mailboxAccount" property="mailboxAccount"/>
+	
+</resultMap>
+       
+<!-- product table all fields -->
+<sql id="Base_Column_List" >
+	 id,productname,productnumber,buyingprice,riseprice,sellprice,saleendtime,publishprice,releaseuser,releasetime,updateuser,updatetime,deletemark,imagtype,images,imagespath,supplierid,offsign,p_describe,sourcesign,brand,features,p_color,p_weight,p_width,p_height,p_length,country,url,mailboxAccount,mailId
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	<if test="productname != null and productname != ''" >
+	    and productname =  #{productname}
+	</if>
+	<if test="productnumber != null and productnumber != ''" >
+	    and productnumber =  #{productnumber}
+	</if>
+	<if test="buyingprice != null and buyingprice != ''" >
+	    and buyingprice =  #{buyingprice}
+	</if>
+	<if test="riseprice != null and riseprice != ''" >
+	    and riseprice =  #{riseprice}
+	</if>
+	<if test="sellprice != null and sellprice != ''" >
+	    and sellprice =  #{sellprice}
+	</if>
+	<if test="saleendtime != null and saleendtime != ''" >
+	    and saleendtime =  #{saleendtime}
+	</if>
+	<if test="publishprice != null and publishprice != ''" >
+	    and publishprice =  #{publishprice}
+	</if>
+	<if test="releaseuser != null and releaseuser != ''" >
+	    and releaseuser =  #{releaseuser}
+	</if>
+	<if test="releasetime != null and releasetime != ''" >
+	    and releasetime =  #{releasetime}
+	</if>
+	<if test="updateuser != null and updateuser != ''" >
+	    and updateuser =  #{updateuser}
+	</if>
+	<if test="updatetime != null and updatetime != ''" >
+	    and updatetime =  #{updatetime}
+	</if>
+	<if test="deletemark != null and deletemark != ''" >
+	    and deletemark =  #{deletemark}
+	</if>
+	<if test="imagtype != null and imagtype != ''" >
+	    and imagtype =  #{imagtype}
+	</if>
+	<if test="images != null and images != ''" >
+	    and images =  #{images}
+	</if>
+	<if test="imagespath != null and imagespath != ''" >
+	    and imagespath =  #{imagespath}
+	</if>
+	<if test="supplierid != null and supplierid != ''" >
+	    and supplierid =  #{supplierid}
+	</if>
+	<if test="offsign != null and offsign != ''" >
+	    and offsign =  #{offsign}
+	</if>
+	<if test="p_describe != null and p_describe != ''" >
+	    and p_describe =  #{p_describe}
+	</if>
+	<if test="sourcesign != null and sourcesign != ''" >
+	    and sourcesign =  #{sourcesign}
+	</if>
+	<if test="brand != null and brand != ''" >
+	    and brand =  #{brand}
+	</if>
+	<if test="features != null and features != ''" >
+	    and features =  #{features}
+	</if>
+	<if test="p_color != null and p_color != ''" >
+	    and p_color =  #{p_color}
+	</if>
+	<if test="p_weight != null and p_weight != ''" >
+	    and p_weight =  #{p_weight}
+	</if>
+	<if test="p_width != null and p_width != ''" >
+	    and p_width =  #{p_width}
+	</if>
+	<if test="p_height != null and p_height != ''" >
+	    and p_height =  #{p_height}
+	</if>
+	<if test="p_length != null and p_length != ''" >
+	    and p_length =  #{p_length}
+	</if>
+	<if test="country != null and country != ''" >
+	    and country =  #{country}
+	</if>
+	<if test="url != null and url != ''" >
+	    and url =  #{url}
+	</if>
+	<if test="mailboxAccount != null and mailboxAccount != ''" >
+	    and mailboxAccount =  #{mailboxAccount}
+	</if>
+	<if test="mailId != null and mailId != ''" >
+	    and mailId =  #{mailId}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into product(id,productname,productnumber,buyingprice,riseprice,sellprice,saleendtime,publishprice,releaseuser,releasetime,updateuser,updatetime,deletemark,imagtype,images,imagespath,supplierid,offsign,p_describe,sourcesign,brand,features,p_color,p_weight,p_width,p_height,p_length,country,url,mailboxAccount,mailId)
+ values(#{id},#{productname},#{productnumber},#{buyingprice},#{riseprice},#{sellprice},#{saleendtime},#{publishprice},#{releaseuser},#{releasetime},#{updateuser},#{updatetime},#{deletemark},#{imagtype},#{images},#{imagespath},#{supplierid},#{offsign},#{p_describe},#{sourcesign},#{brand},#{features},#{p_color},#{p_weight},#{p_width},#{p_height},#{p_length},#{country},#{url},#{mailboxAccount},#{mailId})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update product set productname=#{productname},productnumber=#{productnumber},buyingprice=#{buyingprice},riseprice=#{riseprice},sellprice=#{sellprice},saleendtime=#{saleendtime},publishprice=#{publishprice},releaseuser=#{releaseuser},releasetime=#{releasetime},updateuser=#{updateuser},updatetime=now(),deletemark=#{deletemark},imagtype=#{imagtype},images=#{images},imagespath=#{imagespath},supplierid=#{supplierid},offsign=#{offsign},p_describe=#{p_describe},sourcesign=#{sourcesign},brand=#{brand},features=#{features},p_color=#{p_color},p_weight=#{p_weight},p_width=#{width},p_height=#{p_height},p_length=#{p_length},country=#{country},url=#{url},mailboxAccount=#{mailboxAccount},mailId=#{mailId} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update product set 
+	<trim  suffixOverrides="," >
+	<if test="productname != null  ">
+		productname=#{productname},
+	</if>
+	<if test="productnumber != null  ">
+		productnumber=#{productnumber},
+	</if>
+	<if test="buyingprice != null  ">
+		buyingprice=#{buyingprice},
+	</if>
+	<if test="riseprice != null  ">
+		riseprice=#{riseprice},
+	</if>
+	<if test="sellprice != null  ">
+		sellprice=#{sellprice},
+	</if>
+	<if test="saleendtime != null  ">
+		saleendtime=#{saleendtime},
+	</if>
+	<if test="publishprice != null  ">
+		publishprice=#{publishprice},
+	</if>
+	<if test="releaseuser != null  ">
+		releaseuser=#{releaseuser},
+	</if>
+	<if test="releasetime != null  ">
+		releasetime=#{releasetime},
+	</if>
+	<if test="updateuser != null  ">
+		updateuser=#{updateuser},
+	</if>
+	<if test="updatetime != null  ">
+		updatetime=#{updatetime},
+	</if>
+	<if test="deletemark != null  ">
+		deletemark=#{deletemark},
+	</if>
+	<if test="imagtype != null  ">
+		imagtype=#{imagtype},
+	</if>
+	<if test="images != null  ">
+		images=#{images},
+	</if>
+	<if test="imagespath != null  ">
+		imagespath=#{imagespath},
+	</if>
+	<if test="supplierid != null  ">
+		supplierid=#{supplierid},
+	</if>
+	<if test="offsign != null  ">
+		offsign=#{offsign},
+	</if>
+	<if test="p_describe != null  ">
+		p_describe=#{p_describe},
+	</if>
+	<if test="sourcesign != null  ">
+		sourcesign=#{sourcesign},
+	</if>
+	<if test="brand != null  ">
+		brand=#{brand},
+	</if>
+	<if test="features != null  ">
+		features=#{features},
+	</if>
+	<if test="p_color != null  ">
+		p_color=#{p_color},
+	</if>
+	<if test="p_weight != null  ">
+		p_weight=#{p_weight},
+	</if>
+	<if test="p_width != null  ">
+		p_width=#{p_width},
+	</if>
+	<if test="p_height != null  ">
+		p_height=#{p_height},
+	</if>
+	<if test="p_length != null  ">
+		p_length=#{p_length},
+	</if>
+	<if test="country != null  ">
+		country=#{country},
+	</if>
+	<if test="url != null  ">
+		url=#{url},
+	</if>
+	<if test="mailboxAccount != null  ">
+		mailboxAccount=#{mailboxAccount},
+	</if>
+	<if test="mailId != null  ">
+		mailId=#{mailId},
+	</if>
+	</trim> where id=#{id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from product where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 产品 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from product where id = #{id}
+</select>
+
+<!-- 根据物品编号查询单挑数据 -->
+<select id="getProductNumberId" resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List"/> from product where productNumber = #{productNumber}
+</select>
+
+<!-- 产品 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from product 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询产品列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from product 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   
